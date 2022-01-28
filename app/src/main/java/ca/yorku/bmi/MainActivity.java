@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import ca.yorku.bmi.Model.BMIModel;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,20 +19,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-//    public void calculateBMI(View view){
-//        String S1 = weight.getText().toString();
-//        String S2 = height.getText().toString();
-//
-//        float weightValue = Float.parseFloat(S1);
-//        float heightValue = Float.parseFloat(S2);
-//
-//        float bmi = weightValue / (heightValue * heightValue);
-//
-//        DecimalFormat df = new DecimalFormat(".00");
-//        calculation = String.valueOf(df.format(bmi));
-//
-//        resultText.setText(calculation);
-//
-//
-//    }
+    public void buttonClicked(View v) {
+        EditText weightView = (EditText) findViewById(R.id.weightBox);
+        String weight = weightView.getText().toString();
+
+        EditText heightView = (EditText) findViewById(R.id.heightBox);
+        String height = heightView.getText().toString();
+
+        double wD = BMIModel.toDouble(weight);
+        double hD = BMIModel.toDouble(height);
+        double bmiD = BMIModel.getBMI(wD,hD);
+        String bmiS = BMIModel.formatBMI(bmiD);
+        ((TextView) findViewById(R.id.answer)).setText(bmiS);
+
+
+    }
 }
